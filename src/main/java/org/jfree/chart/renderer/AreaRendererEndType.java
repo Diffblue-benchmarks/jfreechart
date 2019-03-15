@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,112 +27,37 @@
  * ------------------------
  * AreaRendererEndType.java
  * ------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2018, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  * Changes:
  * --------
- * 29-April-2004 : Version 1 (DG);
+ * 29-Apr-2004 : Version 1 (DG);
+ * 08-Jul-2018 : Made AreaRendererEndType an enum (TH);
  *
  */
 
 package org.jfree.chart.renderer;
 
-import java.io.ObjectStreamException;
-import java.io.Serializable;
-
 /**
  * An enumeration of the 'end types' for an area renderer.
  */
-public final class AreaRendererEndType implements Serializable {
-
-    /** For serialization. */
-    private static final long serialVersionUID = -1774146392916359839L;
+public enum AreaRendererEndType {
 
     /**
      * The area tapers from the first or last value down to zero.
      */
-    public static final AreaRendererEndType TAPER = new AreaRendererEndType(
-            "AreaRendererEndType.TAPER");
+    TAPER,
 
     /**
      * The area is truncated at the first or last value.
      */
-    public static final AreaRendererEndType TRUNCATE = new AreaRendererEndType(
-            "AreaRendererEndType.TRUNCATE");
+    TRUNCATE,
 
     /**
-     * The area is levelled at the first or last value.
+     * The area is leveled at the first or last value.
      */
-    public static final AreaRendererEndType LEVEL = new AreaRendererEndType(
-            "AreaRendererEndType.LEVEL");
-
-    /** The name. */
-    private String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private AreaRendererEndType(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }
-
-    /**
-     * Returns {@code true} if this object is equal to the specified
-     * object, and {@code false} otherwise.
-     *
-     * @param obj  the object ({@code null} permitted).
-     *
-     * @return A boolean.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof AreaRendererEndType)) {
-            return false;
-        }
-        AreaRendererEndType that = (AreaRendererEndType) obj;
-        if (!this.name.equals(that.toString())) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Ensures that serialization returns the unique instances.
-     *
-     * @return The object.
-     *
-     * @throws ObjectStreamException if there is a problem.
-     */
-    private Object readResolve() throws ObjectStreamException {
-        Object result = null;
-        if (this.equals(AreaRendererEndType.LEVEL)) {
-            result = AreaRendererEndType.LEVEL;
-        }
-        else if (this.equals(AreaRendererEndType.TAPER)) {
-            result = AreaRendererEndType.TAPER;
-        }
-        else if (this.equals(AreaRendererEndType.TRUNCATE)) {
-            result = AreaRendererEndType.TRUNCATE;
-        }
-        return result;
-    }
-
+    LEVEL
 }
